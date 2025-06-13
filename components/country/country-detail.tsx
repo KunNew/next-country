@@ -7,9 +7,9 @@ import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
 export function CountryDetail({ name }: { name: string }) {
-  const { data, isLoading, isError } = useCountryDetail(name);
+  const { data, isPending, isError } = useCountryDetail(name);
 
-  if (isLoading) {
+  if (isPending) {
     return <CountryDetailSkeleton />;
   }
 

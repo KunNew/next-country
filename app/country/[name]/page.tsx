@@ -8,8 +8,6 @@ import {
 } from "@tanstack/react-query";
 import { CountryDetail } from "@/components/country/country-detail";
 import { Metadata, ResolvingMetadata } from "next";
-import { Suspense } from "react";
-import { CountryDetailSkeleton } from "@/components/country/country-detail-skeleton";
 
 export const dynamic = "force-dynamic";
 
@@ -61,7 +59,11 @@ export async function generateMetadata(
   }
 }
 
-export default async function Page({ params }: { params: Promise<{ name: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ name: string }>;
+}) {
   const resolvedParams = await params;
   const name = decodeURIComponent(resolvedParams.name);
   const queryClient = new QueryClient();
@@ -83,11 +85,9 @@ export default async function Page({ params }: { params: Promise<{ name: string 
         </Button>
       </div>
 
-      <Suspense fallback={<CountryDetailSkeleton />}>
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <CountryDetail name={name} />
-        </HydrationBoundary>
-      </Suspense>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <CountryDetail name={name} />
+      </HydrationBoundary>
     </div>
   );
 }

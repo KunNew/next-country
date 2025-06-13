@@ -11,7 +11,7 @@ export function CountryList() {
   const [sort] = useQueryState("sort", { defaultValue: "" });
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
-  const { data, isPending, isFetchingNextPage, hasNextPage, fetchNextPage } =
+  const { data, isPending,isFetched, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useCountry({ search: query, sort });
 
   useEffect(() => {
