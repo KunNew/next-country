@@ -1,9 +1,10 @@
 "use client";
 
 import { CountryDetailSkeleton } from "./country-detail-skeleton";
-import { useEffect } from "react";
 import { GlobeIcon, MapPin, Users } from "lucide-react";
 import { useCountryDetail } from "@/hooks/use-country-detail";
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 export function CountryDetail({ name }: { name: string }) {
   const { data, isLoading, isError } = useCountryDetail(name);
@@ -25,11 +26,13 @@ export function CountryDetail({ name }: { name: string }) {
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
       <div className="lg:col-span-2">
         <div className="sticky top-8">
-          <img
-            src={data.flags.svg || data.flags.png}
-            alt={`Flag of ${data.name.common}`}
-            className="w-full rounded-lg border border-border/65 shadow-sm"
-          />
+          <Zoom>
+            <img
+              src={data.flags.svg || data.flags.png}
+              alt={`Flag of ${data.name.common}`}
+              className="w-full rounded-lg border border-border/65 shadow-sm"
+            />
+          </Zoom>
 
           <div className="mt-6 space-y-4">
             <h1 className="text-3xl font-bold">{data.name.common}</h1>
